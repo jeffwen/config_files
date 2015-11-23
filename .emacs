@@ -103,7 +103,7 @@
 (setq python-check-command (expand-file-name "~/anaconda/bin/flake8"))
 
 ;; make electric-pair-mode work on more brackets
-(setq electric-pair-pairs '((?\" . ?\")(?\{ . ?\})(?\' . ?\')))
+(setq electric-pair-pairs '((?\" . ?\")(?\{ . ?\})(?\' . ?\')(?\( . ?\))(?\[ . ?\])))
 
 ;; Load markdown mode
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
