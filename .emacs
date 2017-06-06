@@ -19,6 +19,8 @@
     ido-vertical-mode
     markdown-mode
     monokai-theme
+    multiple-cursors
+    ;;darkokai-theme
   ) "a list of packages to ensure are installed at launch.")
 
 ; method to check if all packages are installed
@@ -38,9 +40,14 @@
     (when (not (package-installed-p p))
       (package-install p))))
 
+;;(when (not window-system)
+;;(custom-set-faces '(default ((t (:background nil))))))
 
 ;; Loading the Monokai theme for emacs
 (load-theme 'monokai t)
+
+;; Loading the Darkokai theme for emacs
+;;(load-theme 'darkokai t)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -48,6 +55,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ac-max-width nil)
+ '(custom-safe-themes
+   (quote
+    ("6df30cfb75df80e5808ac1557d5cc728746c8dbc9bc726de35b15180fa6e0ad9" default)))
  '(eldoc-idle-delay 0.1)
  '(electric-pair-mode t)
  '(elpy-eldoc-show-current-function nil)
@@ -65,13 +75,21 @@
  '(load-prefer-newer t)
  '(markdown-mode t)
  '(mouse-yank-at-point t)
- '(python-shell-interpreter "~/anaconda/bin/ipython")
+ '(package-selected-packages
+   (quote
+    (multiple-cursors monokai-theme markdown-mode ido-vertical-mode flycheck exec-path-from-shell jedi elpy)))
+;; '(python-shell-interpreter "/Users/jwen/anaconda/bin/ipython")
+ '(python-shell-virtualenv-root "/Users/jwen/anaconda/envs/")
  '(require-final-newline t)
  '(show-paren-mode t)
  '(tool-bar-mode nil)
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
- '(winner-mode t))
+ '(winner-mode t)
+ '(xterm-mouse-mode t))
 
+;; setting up python interpreter
+(setq python-shell-interpreter "/Users/jwen/anaconda/bin/ipython"
+    python-shell-interpreter-args "--simple-prompt -i")
 
 ;; Sets the path variables to match shell
 (when (memq window-system '(mac ns))
@@ -121,4 +139,19 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#272822" :foreground "#F8F8F2" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight thin :height 110 :width normal :foundry "nil" :family "Menlo")))))
+ '(default ((t (:background nil)))))
+
+;; require multiple cursors
+(require 'multiple-cursors)
+
+;;(global-set-key (kbd "C-M-<mouse-1>") 'mc/add-cursor-on-click)
+;;(global-set-key (kbd "C-M-<down>") 'mc/mark-next-like-this)
+;;(global-set-key (kbd "C-M-<up>") 'mc/mark-previous-like-this)
+;;(global-set-key (kbd "C-M m c") 'mc/edit-lines)
+
+;; force spaces instead of tabs for python mode
+(add-hook 'python-mode-hook 
+          '(lambda () 
+             (setq-default indent-tabs-mode nil)
+             (setq c-basic-indent 4)
+             (setq tab-width 4)))
