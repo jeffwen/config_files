@@ -19,5 +19,5 @@ git() {
 }
 
 coe_notebook() {
-   cd ~/Pixability/coe; (sleep 20 && /usr/bin/open -a "/Applications/Google Chrome.app" 'http://localhost:9999') & docker run --env-file ~/.pixds/my.env -it -v $(pwd):/app -v ~/Pixability/ds-scripts:/var/ds-scripts -v $HOME/.pixds/:/var/pixds -p 9999:8888 coe:local /bin/bash /var/pixds/docker_notebook.sh
+   cd ~/Pixability/coe; (sleep 20 && /usr/bin/open -a "/Applications/Google Chrome.app" 'http://localhost:9999') & docker run --env-file ~/.pixds/my.env -it -rm -v $(pwd):/app -v ~/Pixability/ds-scripts:/var/ds-scripts -v $HOME/.pixds/:/var/pixds -p 9999:8888 coe:local /bin/bash /var/pixds/docker_notebook.sh
 }
